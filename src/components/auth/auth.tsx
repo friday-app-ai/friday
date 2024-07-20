@@ -5,8 +5,8 @@ import { Input } from '../../components/ui/input';
 import { Button } from '../../components/ui/button';
 import { toast } from 'sonner';
 import Image from 'next/image';
-import background from './designer.jpg';
-import books from './stack-of-books.png';
+import background from '../../assets/designer.jpg';
+import books from '../../assets/stack-of-books.png';
 
 const validateSignup = (email: string, password: string, confirmPassword: string): boolean => {
   if (!email.length) {
@@ -30,7 +30,7 @@ const validateSignup = (email: string, password: string, confirmPassword: string
 
 const validateLogin = (email: string, password: string): boolean => {
   if (!email.length) {
-    toast.error('Email is required');
+    toast.error('Email is required')    
     return false;
   }
   if (!password.length) {
@@ -48,8 +48,7 @@ const Auth: React.FC = () => {
   const handleLogin = async () => {
     const validate = validateLogin(email, password);
     if (validate) {
-      // const response = await apiClient.post(LOGIN_ROUTE, { email, password }, { withCredentials: true });
-      // console.log(response);
+     //login route
       console.log(email, password, "login done");
     }
   };
@@ -57,8 +56,7 @@ const Auth: React.FC = () => {
   const handleSignup = async () => {
     const validate = validateSignup(email, password, confirmPassword);
     if (validate) {
-      // const response = await apiClient.post(SIGNUP_ROUTE, { email, password }, { withCredentials: true });
-      // console.log(response);
+      //signup route
       console.log(email, password, "signup done");
     }
   };
@@ -95,7 +93,7 @@ const Auth: React.FC = () => {
             </div>
           </div>
           <div className='hidden xl:flex justify-center items-center'>
-            <Image src={background} alt="background login" className='h-[70vh] w-[20vw] rounded-2xl shadow-md shadow-cyan-500' width={200} ></Image>
+            <Image src={background} alt="background login" className='h-[70vh] w-[20vw] rounded-2xl shadow-md shadow-cyan-500' width={200} priority ></Image>
           </div>
         </div>
       </div>
