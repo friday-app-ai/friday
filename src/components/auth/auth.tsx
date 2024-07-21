@@ -70,7 +70,7 @@ const Auth: React.FC = () => {
               <h1 className='text-5xl font-bold md:text-6xl'>Welcome</h1>
               <Image src={books} alt="books" className='' width={80}></Image>
             </div>
-            <p className='font-medium text-center'>Fill in the details to get started with the best chat app!</p>
+            <p className='font-medium text-center'>Fill in the details to get started with the best AI based education app!</p>
             <div className='flex items-center justify-center w-full'>
               <Tabs className='w-3/4'>
                 <TabsList className="bg-transparent rounded-none w-full">
