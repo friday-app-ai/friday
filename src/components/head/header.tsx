@@ -58,7 +58,7 @@ const Header:React.FC = () => {
         <NavigationMenuList>
           <NavigationMenuItem>
             <Link href="/auth" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 `}>
                 Signup/Login
               </NavigationMenuLink>
             </Link>
