@@ -10,7 +10,7 @@ interface CourseProps {
 
 const Course: React.FC<CourseProps> = ({ id, title, description, status }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-[20vw] lg:w-[25vw] h-[35vh] flex flex-col p-4 border border-gray-200">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-[20vw] lg:w-[20vw] h-[35vh] flex flex-col p-4 border border-gray-200">
       <div className="flex flex-col h-full">
         <h2 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h2>
         <p className="text-gray-600 mb-4 flex-grow">{description}</p>

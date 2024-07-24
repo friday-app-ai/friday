@@ -1,6 +1,6 @@
 import Header from "@/components/head/header";
 import Course from "@/components/course/course";
-
+import Link from "next/link";
 // Static content
 const courses = [
   {
@@ -75,18 +75,22 @@ export default function Page() {
         <div className="w-full max-w-xs bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Actions</h2>
           <div className="flex flex-col gap-4">
-            <button
-              type="button"
+            <Link
+              href="/addCourse"
+              passHref
+             
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
             >
               Create a New Course
-            </button>
-            <button
-              type="button"
+            </Link>
+            <Link
+            href='/'
+            passHref
+
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg"
             >
               Find a Course
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -37,7 +37,7 @@ const Header:React.FC = () => {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                    <Link href="/" legacyBehavior passHref>
+                    <Link href="/courses" legacyBehavior passHref>
                         <NavigationMenuLink  className={navigationMenuTriggerStyle() }>
                             My Courses
                         </NavigationMenuLink>
@@ -68,7 +68,7 @@ const Header:React.FC = () => {
 
           <NavigationMenuItem>
             <Link href="/auth" legacyBehavior passHref>
-              <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 `}>
+              <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 hover:text-white `}>
                 Logout
               </NavigationMenuLink>
             </Link>

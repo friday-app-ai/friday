@@ -10,7 +10,7 @@ export default function Home() {
           <h1 className="text-3xl font-bold text-center">WELCOME USER</h1>
         </div>
         <div className="bg-emerald-400 flex justify-center items-center h-[40vh]">
-          <Link href="/auth" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <Link href="/auth" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" passHref>
             Join Now!
           </Link>
         </div>
