@@ -56,7 +56,7 @@ const courses = [
 export default function Page() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header />
+     
       <div className="flex flex-wrap justify-center gap-6 p-6">
         <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-3xl font-bold mb-6 text-gray-800">Courses</h1>
