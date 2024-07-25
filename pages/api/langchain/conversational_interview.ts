@@ -1,42 +1,48 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { MongoClient, ObjectId } from "mongodb";
-import { BufferMemory } from "langchain/memory";
+import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ChatOpenAI } from "@langchain/openai";
 import { ConversationChain } from "langchain/chains";
 import { MongoDBChatMessageHistory } from "@langchain/mongodb";
-import { ChatPromptTemplate } from "@langchain/core/prompts";
-
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+import { ChatPromptTemplate ,MessagesPlaceholder} from "@langchain/core/prompts";
+import { json } from "stream/consumers";
+import { RunnableWithMessageHistory } from "@langchain/core/runnables";
+import { PromptTemplate } from "@langchain/core/prompts";
+import { Input } from "postcss";
+const handler = async function (
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-
-  const lesson_name = req.body.lesson_name
-  const technology_tech_course_name = req.body.technology_tech_course_name
-
+  
   const client = new MongoClient(process.env.MONGODB_URI || "", {
     driverInfo: { name: "langchainjs" },
   });
   await client.connect();
   const collection = client.db("langchain").collection("memory");
-
-  const sessionId = new ObjectId().toString();
-
+  
+  const sessionId = '51 ';
+  
   const memory = new BufferMemory({
     chatHistory: new MongoDBChatMessageHistory({
       collection,
       sessionId,
     }),
   });
-
+  
   const model = new ChatOpenAI({
     model: "gpt-4o",
     temperature: 0,
   });
+  const lesson_name = req.body.lesson_name
+  const technology_tech_course_name = req.body.technology_tech_course_name
+  const input = req.body.input
 
-  let master_prompt = `
-   You are an AI interviewer chat bot who when given a lesson name and technology/tech course name
+  const prompt = PromptTemplate.fromTemplate(`
+       You are an AI interviewer chat bot who when given a lesson name and technology/tech course name
                 asks relevant questions on the given lesson name: 
                 you ask questions in such format:
                 
@@ -54,31 +60,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 if you think that the user didnt answer correctly, give them a hint and ask the same question again untill user answers correctly.
                 if you user answers it correctly move on to the next question.
                 
-                
+                Current conversation:\n{history}\nHuman: {input}\nAI:
                
-                begin!
-    
-  `
-
-  let prompt=ChatPromptTemplate.fromMessages([
-    ["system", master_prompt],
-    ["human", "{input}"],
-  ]);
-
-  
-
+                begin!`)
   const chain = new ConversationChain({ llm: model, memory,prompt });
-
-
-  const res1 = await chain.invoke({ input: "hello" });
-
-
   
-  const chatHistory = await memory.chatHistory.getMessages();
+  const res1 = await chain.invoke({ input:input});
+  console.log({ res1 });
+  
 
-  await memory.chatHistory.clear();
+  console.log(await memory.chatHistory.getMessages());
+  res.status(200).json({res1})
 
-  res.status(200).json({ res1, chatHistory });
+  // await memory.chatHistory.clear();
+
 };
 
 export default handler;
