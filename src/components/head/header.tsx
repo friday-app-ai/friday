@@ -15,8 +15,8 @@ import {
   import Link from "next/link";
 const Header:React.FC = () => {
     return (
-
-        <div className=" fixed bg-white top-0 left-0 right-0 flex justify-between items-center h-[10vh] px-4 md:px-[2rem] lg:px-[5rem] text-black">
+//fixed bg-white top-0 left-0 right-0
+        <div className=" bg-white  flex justify-between items-center h-[10vh] px-4 md:px-[2rem] lg:px-[5rem] text-black">
             <div className="flex items-center gap-[1rem]">
                 <Link href="/" className="hidden sm:flex items-center gap-[1rem]">
             <Image  src={design}  alt="design" className="w-12 h-12 rounded-full hover:transform hover:scale-105" width={80} height={80} priority>
@@ -37,9 +37,9 @@ const Header:React.FC = () => {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                    <Link href="/" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Features
+                    <Link href="/courses" legacyBehavior passHref>
+                        <NavigationMenuLink  className={navigationMenuTriggerStyle() }>
+                            My Courses
                         </NavigationMenuLink>
                     </Link>
                     </NavigationMenuItem>
@@ -51,15 +51,25 @@ const Header:React.FC = () => {
                         </NavigationMenuLink>
                     </Link>
                     </NavigationMenuItem>
+
+                   
                 </NavigationMenuList>
             </NavigationMenu>
 
-            <NavigationMenu>
-        <NavigationMenuList>
+            <NavigationMenu >
+        <NavigationMenuList className="gap-[2rem]">
+        <NavigationMenuItem>
+                    <Link href="/" legacyBehavior passHref>
+                        <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-slate-300 text-black hover:bg-slate-700 hover:text-white `}>
+                            Account
+                        </NavigationMenuLink>
+                    </Link>
+                    </NavigationMenuItem>
+
           <NavigationMenuItem>
             <Link href="/auth" legacyBehavior passHref>
-              <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 `}>
-                Signup/Login
+              <NavigationMenuLink className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 hover:text-white `}>
+                Logout
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
