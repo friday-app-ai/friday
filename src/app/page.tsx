@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Header from "../components/head/header";
+import CodeHighlighter from "@/components/syntax-highlighter/highlighter";
 
 export default function Home() {
   return (
