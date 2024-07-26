@@ -13,7 +13,6 @@ import Image from "next/image";
 import background from "../../assets/designer.jpg";
 import books from "../../assets/stack-of-books.png";
 import { signInAction, signUpAction } from "@/lib/actions";
-import { useRouter } from "next/router";
 
 const validateSignup = (
   email: string,
