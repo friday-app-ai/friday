@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
 import { Button } from "../ui/button";
 import axios from "axios";
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
+
+import { atomDark, dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { a11yDark, docco, dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
+
 
 interface IProp {
   lesson: LessonContent | null;
@@ -59,11 +64,10 @@ export default function LessonPage({ lesson, loading }: IProp) {
                 {step.point && <div className="text-2xl">{step.point}</div>}
                 {step.description && <div className="">{step.description}</div>}
                 {step.code && step.code?.length > 0 && (
-                  <div className="py-4 px-2 bg-black flex flex-col gap-1">
-                    {step.code.map((block) => {
-                      return <p>{block}</p>;
-                    })}
-                  </div>
+                    
+                    <SyntaxHighlighter  language="javascript"  style={dracula}>
+                    {step.code.join("\n")}
+                  </SyntaxHighlighter>
                 )}
                 {lesson?.explanation &&
                   steps.length < lesson?.explanation?.length - 1 &&
