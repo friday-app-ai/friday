@@ -1,83 +1,57 @@
-import Header from "@/components/head/header";
+"use client";
 import Course from "@/components/course/course";
+import { Tabs, TabsList } from "@/components/ui/tabs";
+import { Course as CourseType } from "@/types";
+import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { InfinitySpin } from "react-loader-spinner";
+import { toast } from "sonner";
+import { finished } from "stream";
 // Static content
-const courses = [
-  {
-    id: 1,
-    title: "Python Basics",
-    description:
-      "An introductory course on Python programming, covering syntax, data types, and basic algorithms.",
-    status: "Completed",
-  },
-  {
-    id: 2,
-    title: "Web Development with JavaScript",
-    description:
-      "Learn the fundamentals of web development using JavaScript, including DOM manipulation and event handling.",
-    status: "Completed",
-  },
-  {
-    id: 3,
-    title: "Data Structures and Algorithms",
-    description:
-      "This course covers essential data structures and algorithms for efficient data processing and problem-solving.",
-    status: "Non-completed",
-  },
-  {
-    id: 4,
-    title: "Machine Learning with Python",
-    description:
-      "Explore the basics of machine learning, including supervised and unsupervised learning techniques using Python.",
-    status: "Non-completed",
-  },
-  {
-    id: 5,
-    title: "Advanced React",
-    description:
-      "Deep dive into advanced React features like hooks, context, and performance optimization techniques.",
-    status: "Completed",
-  },
-  {
-    id: 6,
-    title: "Introduction to TypeScript",
-    description:
-      "Learn the basics of TypeScript, including type annotations, interfaces, and integration with JavaScript projects.",
-    status: "Non-completed",
-  },
-  {
-    id: 7,
-    title: "Backend Development with Node.js",
-    description:
-      "Explore backend development using Node.js, covering topics like Express, databases, and RESTful APIs.",
-    status: "Completed",
-  },
-  {
-    id: 8,
-    title: "Cloud Computing Fundamentals",
-    description:
-      "Understand the fundamentals of cloud computing, including services from AWS, Azure, and Google Cloud Platform.",
-    status: "Non-completed",
-  },
-];
 
 export default function Page() {
+  const [courses, setCourses] = useState<CourseType[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const getCourses = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get("/api/course/");
+      setCourses(res.data);
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong, please refresh");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getCourses();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="flex flex-wrap justify-center gap-6 p-6">
         <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-3xl font-bold mb-6 text-gray-800">Courses</h1>
-          <div className="grid justify-items-center align-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-2  gap-6">
-            {courses.map((course) => (
-              <Course
-                key={course.id}
-                id={course.id}
-                title={course.title}
-                description={course.description}
-                status={course.status}
-              />
-            ))}
-          </div>
+          {loading ? (
+            <div className="w-full h-full grid place-items-center">
+              <InfinitySpin />
+            </div>
+          ) : (
+            <div className="grid justify-items-center align-items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-2  gap-6">
+              {courses.map((course, index) => (
+                <Course
+                  key={index}
+                  id={course._id as string}
+                  title={course.courseName}
+                  description={course.courseDescription}
+                />
+              ))}
+            </div>
+          )}
         </div>
         <div className="w-full max-w-xs bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Actions</h2>

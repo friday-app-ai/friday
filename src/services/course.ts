@@ -56,7 +56,7 @@ input prompt =
 
   async getAllCourse() {
     const courses = await this.Course.find().select(
-      "bannerName courseName _id bannerColor",
+      "bannerName courseName _id bannerColor courseDescription",
     );
     return courses;
   }

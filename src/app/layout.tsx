@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="p-0">
       <body className={inter.className}>
         <SessionProvider>{children}</SessionProvider>
         <Toaster />
