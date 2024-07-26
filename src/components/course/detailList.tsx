@@ -8,20 +8,31 @@ import {
 
 interface IProp {
   modules: Module[];
+  handleGetLesson: (lessonName: string, lessonId: string) => Promise<void>;
 }
-export default function DetailList({ modules }: IProp) {
+export default function DetailList({ modules, handleGetLesson }: IProp) {
   return (
-    <div className="w-[300px] max-h-full overflow-y-scroll">
+    <div className="w-[300px] max-h-full overflow-y-scroll ">
       <Accordion type="single" collapsible className="w-full">
-        {modules.map((module, index) => {
+        {modules.map((module) => {
           return (
             <AccordionItem value={module.moduleName}>
-              <AccordionTrigger>{module.moduleName}</AccordionTrigger>
+              <AccordionTrigger className="text-left ">
+                {module.moduleName}
+              </AccordionTrigger>
               <AccordionContent>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-3">
                   {module.lessons.map((lesson) => {
                     return (
-                      <div className=" p-4 hover:bg-gray-300 cursor-pointer ">
+                      <div
+                        className=" p-3 hover:bg-gray-300 cursor-pointer text-left "
+                        onClick={() =>
+                          handleGetLesson(
+                            lesson.lessonName,
+                            lesson._id as string,
+                          )
+                        }
+                      >
                         {lesson.lessonName}
                       </div>
                     );

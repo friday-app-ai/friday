@@ -24,3 +24,19 @@ export interface Lesson {
   lessonName: string;
   lessonDescription: string;
 }
+
+export interface LessonContent {
+  _id?: string;
+  technology: string;
+  lesson_name: string;
+  explanation: Explanation[];
+  lessonId: string;
+  userEmail: string;
+  completedTill: string;
+}
+export interface Explanation {
+  _id: string;
+  point: string;
+  description: string;
+  code?: string[];
+}
