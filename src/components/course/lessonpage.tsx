@@ -48,7 +48,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
     }
   }, [lesson]);
   return (
-    <div className="w-full h-full border-2  overflow-hidden ">
+    <div className="w-full h-full border-2 bg-[#222831] overflow-hidden ">
       {loading ? (
         <div className="w-full h-full grid place-items-center">
           <InfinitySpin />
@@ -58,7 +58,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
           {steps.map((step, index) => {
             return (
               <div
-                className="bg-gray-500 text-white p-3 flex flex-col gap-3"
+                className="bg-[#222831] text-white p-3 flex flex-col gap-3"
                 id={step._id}
               >
                 {step.point && <div className="text-2xl">{step.point}</div>}
