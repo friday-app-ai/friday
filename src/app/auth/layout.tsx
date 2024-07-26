@@ -1,12 +1,11 @@
-import { Toaster } from "sonner";
-
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default function AuthLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
         <html lang="en">
-            <body>
-                {children}
-                <Toaster closeButton={true} />
-            </body>
+            <body>{children}</body>
         </html>
     );
 }
