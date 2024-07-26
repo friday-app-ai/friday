@@ -16,8 +16,8 @@ export default function DetailList({ modules, handleGetLesson }: IProp) {
       <Accordion type="single" collapsible className="w-full">
         {modules.map((module) => {
           return (
-            <AccordionItem value={module.moduleName}>
-              <AccordionTrigger className="text-left ">
+            <AccordionItem className=" font-bold" value={module.moduleName}>
+              <AccordionTrigger className="text-left font-medium text-xl">
                 {module.moduleName}
               </AccordionTrigger>
               <AccordionContent>
