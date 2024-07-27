@@ -16,6 +16,8 @@ ENV AUTH_SECRET=rIkQehotA59V4k+VL0ZA+Pai+CCs6bssgP+Wjz9MCRE=
 ENV AUTH_RESEND_KEY=re_R2F2S3Q8_HBBHNAwsWuHAHrPPZ74SVWHn
 ENV NODE_ENV=production
 ENV OPENAI_API_KEY=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
+ENV NEXTAUTH_URL=https://friday-rrfkdh26na-el.a.run.app
+ENV AUTH_TRUST_HOST=https://friday-rrfkdh26na-el.a.run.app
 
 # Copy the rest of the application code
 COPY . .
