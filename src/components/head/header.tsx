@@ -17,18 +17,11 @@ const Header: React.FC = () => {
     const router = useRouter();
     return (
         //fixed bg-white top-0 left-0 right-0
-        <div className=" bg-white  flex justify-between items-center h-[10vh] px-4 md:px-[2rem] lg:px-[5rem] text-black">
+        <div className=" bg-white  flex justify-between items-center h-[10vh] px-4 md:px-[2rem] lg:px-[5rem] text-black shadow-custom">
             <div className="flex items-center gap-[1rem]">
                 <Link href="/" className="hidden sm:flex items-center gap-[1rem]">
-                    <Image
-                        src={design}
-                        alt="design"
-                        className="w-12 h-12 rounded-full hover:transform hover:scale-105"
-                        width={80}
-                        height={80}
-                        priority
-                    ></Image>
-                    <span className="hidden md:inline-block text-xl font-bold hover:transform hover:scale-105">
+                    <i className="fa-solid fa-person-chalkboard fa-2x text-cyan-600"></i>
+                    <span className="hidden md:inline-block text-xl font-sans  hover:transform hover:scale-105">
                         Friday
                     </span>
                 </Link>
