@@ -7,7 +7,6 @@ export async function PATCH(req: Request) {
       stepId: string;
     };
     const lessonService = await GetLessonService();
-
     await lessonService.setLessonStep(lessonId, stepId);
     return new Response("Lesson updated succfully", { status: 201 });
   } catch (error) {

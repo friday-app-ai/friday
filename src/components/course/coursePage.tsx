@@ -33,8 +33,10 @@ export default function CoursePage() {
         </div>
       ) : (
         <div className="flex flex-wrap gap-10 mt-5">
-          {courses.map((course) => {
-            return <CourseCard {...course} _id={course._id as string} />;
+          {courses.map((course, index) => {
+            return (
+              <CourseCard {...course} _id={course._id as string} key={index} />
+            );
           })}
         </div>
       )}
