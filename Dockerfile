@@ -18,6 +18,8 @@ ENV NODE_ENV=production
 ENV OPENAI_API_KEY=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
 ENV NEXTAUTH_URL=https://friday-rrfkdh26na-el.a.run.app
 ENV AUTH_TRUST_HOST=https://friday-rrfkdh26na-el.a.run.app
+# ENV NEXTAUTH_URL=http://localhost:3000
+# ENV AUTH_TRUST_HOST=http://localhost:3000
 
 # Copy the rest of the application code
 COPY . .
