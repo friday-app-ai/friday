@@ -28,6 +28,8 @@ export default function CourseDetail({ courseId }: { courseId: string }) {
   const handleGetLesson = async (lessonName: string, lessonId: string) => {
     try {
       setLessonLoading(true);
+      console.log(data);
+      console.log(data?.user?.email as string);
       const res = await axios.get("/api/lesson", {
         params: {
           userEmail: data?.user?.email as string,
