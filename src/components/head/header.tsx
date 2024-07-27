@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
     NavigationMenu,
@@ -9,6 +10,7 @@ import {
 import design from "../../assets/designer_logo.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 const Header: React.FC = () => {
     return (
         //fixed bg-white top-0 left-0 right-0
@@ -60,23 +62,14 @@ const Header: React.FC = () => {
             <NavigationMenu>
                 <NavigationMenuList className="gap-[2rem]">
                     <NavigationMenuItem>
-                        <Link href="/" legacyBehavior passHref>
-                            <NavigationMenuLink
-                                className={`${navigationMenuTriggerStyle()} bg-slate-300 text-black hover:bg-slate-700 hover:text-white `}
-                            >
-                                Account
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                        <Link href="/auth" legacyBehavior passHref>
-                            <NavigationMenuLink
-                                className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 hover:text-white `}
-                            >
-                                Logout
-                            </NavigationMenuLink>
-                        </Link>
+                        <NavigationMenuLink
+                            onClick={() => {
+                                signOut();
+                            }}
+                            className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 hover:text-white cursor-pointer `}
+                        >
+                            Logout
+                        </NavigationMenuLink>
                     </NavigationMenuItem>
                 </NavigationMenuList>
             </NavigationMenu>
