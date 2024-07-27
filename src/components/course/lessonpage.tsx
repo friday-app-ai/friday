@@ -4,20 +4,21 @@ import { InfinitySpin } from "react-loader-spinner";
 import { Button } from "../ui/button";
 import axios from "axios";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-
+import design from "../../assets/artificial-intelligence.png";
 import { atomDark, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   a11yDark,
   docco,
   dracula,
 } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
+import Image from "next/image";
 interface IProp {
   lesson: LessonContent | null;
   loading: boolean;
 }
 export default function LessonPage({ lesson, loading }: IProp) {
   const [steps, setSteps] = useState<Explanation[]>([]);
+  
   const handleNext = async (index: number, stepId: string) => {
     await axios.patch("/api/lesson/step", {
       lessonId: lesson?._id,
@@ -52,8 +53,13 @@ export default function LessonPage({ lesson, loading }: IProp) {
       }, 100);
     }
   }, [lesson]);
+  
   return (
     <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">
+      {lesson===null && 
+      <div className="w-full h-full flex flex-col justify-center items-center gap-3 text-4xl text-white">
+        <Image src={design} alt="design" height={200}></Image>
+        Please select a Lession to get Started!😁</div>}
       {loading ? (
         <div className="w-full h-full grid place-items-center">
           <InfinitySpin />
