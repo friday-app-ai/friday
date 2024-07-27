@@ -1,6 +1,7 @@
 import React from "react";
 import logo_web from "../../assets/friday.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection: React.FC = () => {
   return (
@@ -20,8 +21,8 @@ const HeroSection: React.FC = () => {
             way you learn and teach. Join us and explore the future of education
             today!
           </p>
-          <a
-            href="#"
+          <Link
+            href="/auth"
             className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
           >
             Get started
@@ -37,7 +38,7 @@ const HeroSection: React.FC = () => {
                 clipRule="evenodd"
               ></path>
             </svg>
-          </a>
+          </Link>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
           <Image src={logo_web} alt="mockup"></Image>
