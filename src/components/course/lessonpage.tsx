@@ -65,6 +65,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
               <div
                 className="bg-[#222831] text-white p-3 flex flex-col gap-3"
                 id={step._id}
+                key={step._id}
               >
                 {step.point && <div className="text-2xl">{step.point}</div>}
                 {step.description && <div className="">{step.description}</div>}
