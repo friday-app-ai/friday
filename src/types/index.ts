@@ -39,4 +39,5 @@ export interface Explanation {
   point: string;
   description: string;
   code?: string[];
+  isDoubt: boolean;
 }

@@ -12,7 +12,9 @@ import mongoose, { Schema } from "mongoose";
 const lessonContentSchema = new Schema<LessonContent>({
   technology: String,
   lesson_name: String,
-  explanation: [{ point: String, description: String, code: [String] }],
+  explanation: [
+    { point: String, description: String, code: [String], isDoubt: Boolean },
+  ],
   lessonId: String,
   userEmail: String,
   completedTill: String,

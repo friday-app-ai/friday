@@ -3,7 +3,8 @@ import { PromptTemplate } from "@langchain/core/prompts";
 import dbConnect from "@/lib/dbConnect";
 import lessonContentModel from "@/models/lessonContent";
 import { JsonOutputParser } from "@langchain/core/output_parsers";
-import { LessonContent } from "@/types";
+import { Explanation, LessonContent } from "@/types";
+import { v4 } from "uuid";
 
 export default async function GetLessonService() {
   const service = new LessonService();
@@ -15,6 +16,54 @@ export class LessonService {
   private Lesson = lessonContentModel;
   async init() {
     await dbConnect();
+  }
+  async generateDoubt(
+    lessonName: string,
+    courseName: string,
+    code: string[],
+    description: string,
+    prompt: string,
+  ) {
+    const model = new ChatOpenAI({
+      model: "gpt-4o",
+      modelKwargs: {
+        response_format: { type: "json_object" },
+      },
+    });
+
+    const output_example_JSON = `
+      {"description":"explanation of the doubt", "point":"main heading for the doubt", "code":["code line1", "code line 2"]// code only if required}
+      `;
+
+    const promptTemplate = PromptTemplate.fromTemplate(
+      `You are a master at doubt solving, given the 
+user input = {userInput}
+lesson name = {lesson_name}
+technology course name = {technology_tech_course_name}
+previous explanation = {previousExplnation}
+previous code = {previousCode}
+
+generate a new better explanation and code(generate code if required) than the previous explanation keeping in mind the user input.
+
+output instructions:
+output the JSON is following format:
+code is optional and only should be added in new output if previous code was provided.
+expected output :{expected_output}
+
+begin!`,
+    );
+
+    const parser = new JsonOutputParser<Explanation>();
+    const chain = promptTemplate.pipe(model).pipe(parser);
+    const result = await chain.invoke({
+      technology_tech_course_name: courseName,
+      userInput: prompt,
+      lesson_name: lessonName,
+      previousExplnation: description,
+      previousCode: code.toString(),
+      expected_output: output_example_JSON,
+    });
+    return result;
   }
   async generateLesson(
     technology_tech_course_name: string,
@@ -66,12 +115,42 @@ export class LessonService {
     return savedLesson;
   }
   async setLessonStep(lessonId: string, stepId: string) {
-    console.log(stepId);
-    const x = await this.Lesson.findByIdAndUpdate(lessonId, {
+    await this.Lesson.findByIdAndUpdate(lessonId, {
       $set: {
         completedTill: stepId,
       },
     });
-    console.log(x);
+  }
+
+  async addDoubt(
+    lessonId: string,
+    index: number,
+    point: string,
+    description: string,
+    code: string[],
+  ) {
+    const lesson = await this.Lesson.findById<LessonContent>(lessonId);
+    if (!lesson) {
+      return;
+    }
+    const expId = v4();
+    console.log({ point, description, code, _id: expId, isDoubt: true });
+    lesson.explanation = [
+      ...lesson.explanation.slice(0, index),
+      { point, description, code, _id: expId, isDoubt: true },
+      ...lesson.explanation.slice(index + 1),
+    ];
+    const doubt = await this.Lesson.findByIdAndUpdate(lessonId, {
+      $set: {
+        "lesson.explanation": lesson.explanation,
+      },
+    });
+    await this.Lesson.findByIdAndUpdate(lessonId, {
+      $set: {
+        completedTill: doubt.explanation[index]._id,
+      },
+    });
+
+    return { point, description, code, _id: expId, isDoubt: true };
   }
 }
