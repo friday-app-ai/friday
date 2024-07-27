@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 import { InfinitySpin } from "react-loader-spinner";
 import { Button } from "../ui/button";
 import axios from "axios";
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
+
+import { atomDark, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  a11yDark,
+  docco,
+  dracula,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface IProp {
   lesson: LessonContent | null;
@@ -18,8 +26,8 @@ export default function LessonPage({ lesson, loading }: IProp) {
     setSteps([...(lesson?.explanation.slice(0, index + 2) as Explanation[])]);
     setTimeout(() => {
       document
-        .getElementById(steps[steps.length - 1]._id)
-        ?.scrollIntoView({ behavior: "smooth" });
+        .getElementById("scroll")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
   };
   useEffect(() => {
@@ -36,34 +44,35 @@ export default function LessonPage({ lesson, loading }: IProp) {
       }
 
       setTimeout(() => {
-        document
-          .getElementById(steps[steps.length - 1]._id)
-          ?.scrollIntoView({ behavior: "smooth" });
-      }, 1000);
+        if (steps.length > 0) {
+          document
+            .getElementById("scroll")
+            ?.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
     }
   }, [lesson]);
   return (
-    <div className="w-full h-full border-2  overflow-hidden ">
+    <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">
       {loading ? (
         <div className="w-full h-full grid place-items-center">
           <InfinitySpin />
         </div>
       ) : (
-        <div className="w-full h-full overflow-y-scroll flex flex-col   ">
+        <div className="w-full  max-h-full overflow-y-scroll flex flex-col   ">
           {steps.map((step, index) => {
             return (
               <div
-                className="bg-gray-500 text-white p-3 flex flex-col gap-3"
+                className="bg-[#222831] text-white p-3 flex flex-col gap-3"
                 id={step._id}
+                key={step._id}
               >
                 {step.point && <div className="text-2xl">{step.point}</div>}
                 {step.description && <div className="">{step.description}</div>}
                 {step.code && step.code?.length > 0 && (
-                  <div className="py-4 px-2 bg-black flex flex-col gap-1">
-                    {step.code.map((block) => {
-                      return <p>{block}</p>;
-                    })}
-                  </div>
+                  <SyntaxHighlighter language="javascript" style={dracula}>
+                    {step.code.join("\n")}
+                  </SyntaxHighlighter>
                 )}
                 {lesson?.explanation &&
                   steps.length < lesson?.explanation?.length - 1 &&
@@ -78,6 +87,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
               </div>
             );
           })}
+          <div id="scroll" />
         </div>
       )}
     </div>

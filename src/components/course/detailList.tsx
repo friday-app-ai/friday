@@ -14,18 +14,23 @@ export default function DetailList({ modules, handleGetLesson }: IProp) {
   return (
     <div className="w-[300px] max-h-full overflow-y-scroll ">
       <Accordion type="single" collapsible className="w-full">
-        {modules.map((module) => {
+        {modules.map((module, index) => {
           return (
-            <AccordionItem value={module.moduleName}>
-              <AccordionTrigger className="text-left ">
+            <AccordionItem
+              className=" font-bold"
+              value={module.moduleName}
+              key={index}
+            >
+              <AccordionTrigger className="text-left font-medium text-xl">
                 {module.moduleName}
               </AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-3">
-                  {module.lessons.map((lesson) => {
+                  {module.lessons.map((lesson, index) => {
                     return (
                       <div
                         className=" p-3 hover:bg-gray-300 cursor-pointer text-left "
+                        key={index}
                         onClick={() =>
                           handleGetLesson(
                             lesson.lessonName,
