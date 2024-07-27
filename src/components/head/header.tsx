@@ -10,8 +10,11 @@ import {
 import design from "../../assets/designer_logo.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const Header: React.FC = () => {
+    const { status } = useSession();
+    const router = useRouter();
     return (
         //fixed bg-white top-0 left-0 right-0
         <div className=" bg-white  flex justify-between items-center h-[10vh] px-4 md:px-[2rem] lg:px-[5rem] text-black">
@@ -64,11 +67,15 @@ const Header: React.FC = () => {
                     <NavigationMenuItem>
                         <NavigationMenuLink
                             onClick={() => {
-                                signOut();
+                                if (status === "authenticated") {
+                                    signOut();
+                                } else {
+                                    router.push("/auth");
+                                }
                             }}
                             className={`${navigationMenuTriggerStyle()} bg-blue-500 text-white hover:bg-blue-700 hover:text-white cursor-pointer `}
                         >
-                            Logout
+                            {status === "authenticated" ? "Logout" : "Login"}
                         </NavigationMenuLink>
                     </NavigationMenuItem>
                 </NavigationMenuList>
