@@ -46,10 +46,10 @@ export default function LessonPage({ lesson, loading }: IProp) {
       setTimeout(() => {
         if (steps.length > 0) {
           document
-            .getElementById(steps[steps.length - 1]._id)
+            .getElementById("scroll")
             ?.scrollIntoView({ behavior: "smooth" });
         }
-      }, 1000);
+      }, 100);
     }
   }, [lesson]);
   return (
