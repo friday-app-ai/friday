@@ -47,7 +47,7 @@ export default function CourseDetail({ courseId }: { courseId: string }) {
     getCourseDetails();
   }, []);
   return (
-    <div className=" h-full flex flex-col p-8  pb-4 pt-4  overflow-hidden ">
+    <div className=" h-full max-h-screen  flex flex-col p-8   pt-4  overflow-hidden ">
       <header className="flex flex-col">
         <p className="text-[#00ADB5] font-bold text-3xl ">
           {course?.courseName}
