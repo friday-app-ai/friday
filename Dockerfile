@@ -11,6 +11,12 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+ENV MONGODB_URI=mongodb+srv://tejes14319:test@friday.euxoeki.mongodb.net/?retryWrites=true&w=majority&appName=friday
+ENV AUTH_SECRET=rIkQehotA59V4k+VL0ZA+Pai+CCs6bssgP+Wjz9MCRE=
+ENV AUTH_RESEND_KEY=re_R2F2S3Q8_HBBHNAwsWuHAHrPPZ74SVWHn
+ENV NODE_ENV=production
+ENV OPENAI_API_KEY=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
+
 # Copy the rest of the application code
 COPY . .
 
