@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coreui/icons": "^3.0.1",
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@hookform/resolvers": "^3.9.0",
     "@langchain/community": "^0.2.20",
     "@langchain/mongodb": "^0.0.4",
@@ -36,6 +38,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.1",
+    "react-icons": "^5.2.1",
     "react-loader-spinner": "^6.1.6",
     "react-spinners": "^0.14.1",
     "react-syntax-highlighter": "^15.5.0",
