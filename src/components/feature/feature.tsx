@@ -44,7 +44,7 @@ const FeaturesSection: React.FC = () => {
               </h5>
               <p className="text-gray-600 mb-3">
                 An AI interview is conducted using text-to-speech technology to
-                ask questions. Based on the user's performance in the exams and
+                ask questions. Based on the user performance in the exams and
                 interviews, the AI adjusts the course content.
               </p>
             </div>

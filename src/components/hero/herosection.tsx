@@ -15,8 +15,8 @@ const HeroSection: React.FC = () => {
             Welcome to Friday! Dive into a world where AI meets education,
             making learning fun and tailored just for you. Our platform adapts
             to your unique style, offering interactive lessons, instant
-            feedback, and personalized paths to keep you motivated. Whether
-            you're a student aiming high, a teacher looking for cool tools, or a
+            feedback, and personalized paths to keep you motivated. Whether you
+            re a student aiming high, a teacher looking for cool tools, or a
             parent wanting to support your child, Friday is here to change the
             way you learn and teach. Join us and explore the future of education
             today!
