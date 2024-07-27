@@ -5,9 +5,12 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
 
-import { atomDark, dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { a11yDark, docco, dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
-
+import { atomDark, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  a11yDark,
+  docco,
+  dracula,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface IProp {
   lesson: LessonContent | null;
@@ -23,8 +26,8 @@ export default function LessonPage({ lesson, loading }: IProp) {
     setSteps([...(lesson?.explanation.slice(0, index + 2) as Explanation[])]);
     setTimeout(() => {
       document
-        .getElementById(steps[steps.length - 1]._id)
-        ?.scrollIntoView({ behavior: "smooth" });
+        .getElementById("scroll")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
   };
   useEffect(() => {
@@ -50,13 +53,13 @@ export default function LessonPage({ lesson, loading }: IProp) {
     }
   }, [lesson]);
   return (
-    <div className="w-full h-full border-2 bg-[#222831] overflow-hidden ">
+    <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">
       {loading ? (
         <div className="w-full h-full grid place-items-center">
           <InfinitySpin />
         </div>
       ) : (
-        <div className="w-full h-full overflow-y-scroll flex flex-col   ">
+        <div className="w-full  max-h-full overflow-y-scroll flex flex-col   ">
           {steps.map((step, index) => {
             return (
               <div
@@ -66,8 +69,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
                 {step.point && <div className="text-2xl">{step.point}</div>}
                 {step.description && <div className="">{step.description}</div>}
                 {step.code && step.code?.length > 0 && (
-                    
-                    <SyntaxHighlighter  language="javascript"  style={dracula}>
+                  <SyntaxHighlighter language="javascript" style={dracula}>
                     {step.code.join("\n")}
                   </SyntaxHighlighter>
                 )}
@@ -84,6 +86,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
               </div>
             );
           })}
+          <div id="scroll" />
         </div>
       )}
     </div>
