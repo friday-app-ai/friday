@@ -41,9 +41,11 @@ export default function LessonPage({ lesson, loading }: IProp) {
       }
 
       setTimeout(() => {
-        document
-          .getElementById(steps[steps.length - 1]._id)
-          ?.scrollIntoView({ behavior: "smooth" });
+        if (steps.length > 0) {
+          document
+            .getElementById(steps[steps.length - 1]._id)
+            ?.scrollIntoView({ behavior: "smooth" });
+        }
       }, 1000);
     }
   }, [lesson]);

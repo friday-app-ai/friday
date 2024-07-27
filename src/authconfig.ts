@@ -6,8 +6,8 @@ export const authConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      //const isLoggedIn = !!auth?.user;
-      const isLoggedIn = true;
+      console.log("huhh");
+      const isLoggedIn = !!auth?.user;
       const isOnProtected = !nextUrl.pathname.startsWith("/auth");
       if (isOnProtected) {
         if (isLoggedIn) return true;
