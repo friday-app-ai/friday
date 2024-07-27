@@ -4,7 +4,7 @@ import { InfinitySpin } from "react-loader-spinner";
 import { Button } from "../ui/button";
 import axios from "axios";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
-import design from "../../assets/artificial-intelligence.png";
+import design from "../../assets/designer_logo.jpg";
 import { atomDark, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   a11yDark,
@@ -58,7 +58,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
     <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">
       {lesson===null && 
       <div className="w-full h-full flex flex-col justify-center items-center gap-3 text-4xl text-white">
-        <Image src={design} alt="design" height={200}></Image>
+        <Image src={design} alt="design" height={200} className="rounded-full"></Image>
         Please select a Lession to get Started!😁</div>}
       {loading ? (
         <div className="w-full h-full grid place-items-center">
