@@ -13,7 +13,12 @@ const lessonContentSchema = new Schema<LessonContent>({
   technology: String,
   lesson_name: String,
   explanation: [
-    { point: String, description: String, code: [String], isDoubt: Boolean },
+    {
+      point: String,
+      description: String,
+      code: [String],
+      isDoubt: Boolean,
+    },
   ],
   lessonId: String,
   userEmail: String,

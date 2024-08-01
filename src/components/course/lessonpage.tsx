@@ -88,7 +88,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
 
   return (
     <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">
-      {lesson === null && (
+      {lesson === null && !loading && (
         <div className="w-full h-full flex flex-col justify-center items-center gap-3 text-4xl text-white">
           <Image
             src={design}
@@ -104,7 +104,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
           <InfinitySpin />
         </div>
       ) : (
-        <div className="w-full  max-h-full overflow-y-scroll flex flex-col   ">
+        <div className="w-full  max-h-[800px] overflow-y-scroll flex flex-col   ">
           {steps.map((step, index) => {
             return (
               <div
@@ -123,20 +123,11 @@ export default function LessonPage({ lesson, loading }: IProp) {
                   {lesson?.explanation && index === steps.length - 1 && (
                     <>
                       {doubt && (
-                        <>
-                          <input
-                            ref={doubtRef}
-                            className="bg-gray-700  rounded-md px-3 "
-                            placeholder="ask me a doubt "
-                          />
-                          <Button
-                            onClick={() => {
-                              setDoubt(false);
-                            }}
-                          >
-                            close
-                          </Button>
-                        </>
+                        <input
+                          ref={doubtRef}
+                          className="bg-gray-700  rounded-md px-3 "
+                          placeholder="ask me a doubt "
+                        />
                       )}
                       <Button
                         className=""
@@ -155,6 +146,15 @@ export default function LessonPage({ lesson, loading }: IProp) {
                       >
                         ask doubt
                       </Button>
+                      {doubt && (
+                        <Button
+                          onClick={() => {
+                            setDoubt(false);
+                          }}
+                        >
+                          close
+                        </Button>
+                      )}
                     </>
                   )}
 

@@ -134,20 +134,17 @@ begin!`,
       return;
     }
     const expId = v4();
-    console.log({ point, description, code, _id: expId, isDoubt: true });
+    console.log(point, description, code);
     lesson.explanation = [
       ...lesson.explanation.slice(0, index),
-      { point, description, code, _id: expId, isDoubt: true },
-      ...lesson.explanation.slice(index + 1),
+      { point, description, code, isDoubt: true, _id: "" },
+      ...lesson.explanation.slice(index),
     ];
-    const doubt = await this.Lesson.findByIdAndUpdate(lessonId, {
-      $set: {
-        "lesson.explanation": lesson.explanation,
-      },
-    });
+    const x = await this.Lesson.findByIdAndUpdate(lessonId, lesson);
+    console.log(x);
     await this.Lesson.findByIdAndUpdate(lessonId, {
       $set: {
-        completedTill: doubt.explanation[index]._id,
+        completedTill: lesson.explanation[index - 1]._id,
       },
     });
 
