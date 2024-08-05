@@ -24,7 +24,7 @@ const handler = async function (
   await client.connect();
   const collection = client.db("langchain").collection("memory");
   
-  const sessionId = '51 ';
+  const sessionId = req.body.sessionId;
   
   const memory = new BufferMemory({
     chatHistory: new MongoDBChatMessageHistory({

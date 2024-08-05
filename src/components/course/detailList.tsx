@@ -5,12 +5,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
+import { useRouter } from "next/navigation";
+var md5 = require('md5');
 interface IProp {
   modules: Module[];
   handleGetLesson: (lessonName: string, lessonId: string) => Promise<void>;
 }
+import { usePathname } from "next/navigation";
 export default function DetailList({ modules, handleGetLesson }: IProp) {
+  const router = useRouter()
+  const pathName = usePathname()
   return (
     <div className="w-[300px] max-h-full overflow-y-scroll ">
       <Accordion type="single" collapsible className="w-full">
@@ -28,6 +32,7 @@ export default function DetailList({ modules, handleGetLesson }: IProp) {
                 <div className="flex flex-col gap-3">
                   {module.lessons.map((lesson, index) => {
                     return (
+                      <>
                       <div
                         className=" p-3 hover:bg-gray-300 cursor-pointer text-left "
                         key={index}
@@ -40,6 +45,13 @@ export default function DetailList({ modules, handleGetLesson }: IProp) {
                       >
                         {lesson.lessonName}
                       </div>
+                      <div className=" p-3 hover:bg-gray-300 bg-blue-300 cursor-pointer text-left "
+                        key={index}
+                        onClick={()=>router.push(`${pathName}/${md5(lesson.lessonName)}`)}>
+
+                      {`interview:  ${lesson.lessonName}`}
+                      </div>
+                      </>
                     );
                   })}
                 </div>
