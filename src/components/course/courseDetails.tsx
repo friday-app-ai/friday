@@ -67,6 +67,7 @@ export default function CourseDetail({ courseId }: { courseId: string }) {
           course && (
             <>
               <DetailList
+                courseName={course.courseName}
                 modules={course?.modules}
                 handleGetLesson={handleGetLesson}
               />

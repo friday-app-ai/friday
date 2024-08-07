@@ -4,17 +4,14 @@ import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { ChatOpenAI } from "@langchain/openai";
 import { ConversationChain } from "langchain/chains";
 import { MongoDBChatMessageHistory } from "@langchain/mongodb";
-import { ChatPromptTemplate ,MessagesPlaceholder} from "@langchain/core/prompts";
-import { json } from "stream/consumers";
-import { RunnableWithMessageHistory } from "@langchain/core/runnables";
 import { PromptTemplate } from "@langchain/core/prompts";
-import { Input } from "postcss";
+
 const handler = async function (
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', ['GET']);
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
   
@@ -22,9 +19,9 @@ const handler = async function (
     driverInfo: { name: "langchainjs" },
   });
   await client.connect();
-  const collection = client.db("langchain").collection("memory");
+  const collection = client.db("test").collection("memory");
   
-  const sessionId = req.body.sessionId;
+  const sessionId = req.body.session_id;
   
   const memory = new BufferMemory({
     chatHistory: new MongoDBChatMessageHistory({
@@ -66,14 +63,8 @@ const handler = async function (
   const chain = new ConversationChain({ llm: model, memory,prompt });
   
   const res1 = await chain.invoke({ input:input});
-  console.log({ res1 });
-  
-
-  console.log(await memory.chatHistory.getMessages());
-  res.status(200).json({res1})
-
-  // await memory.chatHistory.clear();
-
+  const history = await memory.chatHistory.getMessages()
+  res.status(200).json({res1,history})
 };
 
 export default handler;

@@ -10,9 +10,10 @@ var md5 = require('md5');
 interface IProp {
   modules: Module[];
   handleGetLesson: (lessonName: string, lessonId: string) => Promise<void>;
+  courseName:String
 }
 import { usePathname } from "next/navigation";
-export default function DetailList({ modules, handleGetLesson }: IProp) {
+export default function DetailList({ modules, handleGetLesson,courseName }: IProp) {
   const router = useRouter()
   const pathName = usePathname()
   return (
@@ -47,7 +48,7 @@ export default function DetailList({ modules, handleGetLesson }: IProp) {
                       </div>
                       <div className=" p-3 hover:bg-gray-300 bg-blue-300 cursor-pointer text-left "
                         key={index}
-                        onClick={()=>router.push(`${pathName}/${md5(lesson.lessonName)}`)}>
+                        onClick={()=>router.push(`${pathName}/${md5(lesson.lessonName)}?lesson=${lesson.lessonName}&course=${courseName}`)}>
 
                       {`interview:  ${lesson.lessonName}`}
                       </div>

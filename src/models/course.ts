@@ -1,8 +1,9 @@
 import { Course } from "@/types";
 import mongoose, { Schema } from "mongoose";
 
+
 const courseSchema = new Schema<Course>({
-  bannerName: String,
+  bannerName:String,
   courseName: String,
   bannerColor: String,
   courseDescription: String,

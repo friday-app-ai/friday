@@ -1,6 +1,7 @@
 import { User } from "@/types";
 import mongoose, { Schema } from "mongoose";
 
+
 const userSchema = new Schema<User>({
   name: { type: String, required: true },
   email: { type: String, required: true },

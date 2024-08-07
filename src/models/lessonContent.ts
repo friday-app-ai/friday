@@ -9,8 +9,9 @@
 import { LessonContent } from "@/types";
 import mongoose, { Schema } from "mongoose";
 
+
 const lessonContentSchema = new Schema<LessonContent>({
-  technology: String,
+  technology:String,
   lesson_name: String,
   explanation: [
     {
