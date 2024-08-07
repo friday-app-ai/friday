@@ -56,7 +56,7 @@ export default function ChatWindow({
     getChat(params.lessonID);
   }, []);
 
-  const addMessage = async(mess:string)=>{
+  const addMessage = async(mess?:string)=>{
     setLoading(true)
     const messages = await axios.post(
       "http://localhost:3000/api/langchain/conversational_interview",
@@ -69,6 +69,15 @@ export default function ChatWindow({
     );
     setData(messages.data);
     setLoading(false);
+  }
+
+  const handleKeyDown = (event:any) => {
+    if (event.key === 'Enter') {
+      addMessage(textareaRef.current?.value)
+      if(textareaRef.current){
+        textareaRef.current.value='' 
+      }
+    }
   }
 
   const handelClick = () =>{
@@ -131,6 +140,7 @@ export default function ChatWindow({
   
         <div className="bg-muted rounded-b-lg p-3 flex items-center gap-2">
           <Textarea
+            onKeyDown={handleKeyDown}
             ref={textareaRef}
             placeholder="Type your message..."
             className="flex-1 resize-none"
