@@ -47,7 +47,7 @@ export default function CourseDetail({ courseId }: { courseId: string }) {
   };
   useEffect(() => {
     getCourseDetails();
-  }, []);
+  }, [getCourseDetails]);
   return (
     <div className=" h-full max-h-screen  flex flex-col p-8   pt-4  overflow-hidden ">
       <header className="flex flex-col">

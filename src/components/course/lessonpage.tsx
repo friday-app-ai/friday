@@ -84,7 +84,7 @@ export default function LessonPage({ lesson, loading }: IProp) {
         }
       }, 100);
     }
-  }, [lesson]);
+  }, [lesson,steps.length]);
 
   return (
     <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">

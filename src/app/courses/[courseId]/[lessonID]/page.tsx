@@ -20,7 +20,7 @@ export default function ChatWindow({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [input,setInput] = useState("")
-  const endOfMessagesRef = useRef<HTMLDivElement>()
+  const endOfMessagesRef = useRef<HTMLDivElement | null>(null)
   console.log(params);
   useEffect(() => {
     async function getChat(lessonID: string,input?:string) {
@@ -54,7 +54,7 @@ export default function ChatWindow({
       }
     }
     getChat(params.lessonID);
-  }, []);
+  }, [course,lesson,params.lessonID]);
 
   const addMessage = async(mess?:string)=>{
     setLoading(true)
