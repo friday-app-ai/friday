@@ -35,7 +35,7 @@
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/friday-ai-education-platform.git
+    git clone  https://github.com/friday-app-ai/friday
    ```
 
 2. **Install dependencies**:
