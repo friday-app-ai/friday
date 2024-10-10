@@ -1,6 +1,3 @@
-Here’s a sample `README.md` for the "Friday" educational platform project:
-
----
 
 # Friday - Personalized Education with AI
 
