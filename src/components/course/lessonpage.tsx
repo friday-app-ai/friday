@@ -82,9 +82,9 @@ export default function LessonPage({ lesson, loading }: IProp) {
             .getElementById("scroll")
             ?.scrollIntoView({ behavior: "smooth" });
         }
-      }, 100);
+      }, 400);
     }
-  }, [lesson,steps.length]);
+  }, [lesson]);
 
   return (
     <div className="w-full h-full border-2 bg-[#222831] overflow-hidden py-2  max-h-[800px] ">

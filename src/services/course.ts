@@ -5,11 +5,14 @@ import { JsonOutputParser } from "@langchain/core/output_parsers";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { Course } from "@/types";
 import { v4 } from "uuid";
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
-const model = new ChatOpenAI({
-  model: "gpt-4o",
+const model = new ChatGoogleGenerativeAI({
+  model: "gemini-1.5-pro",
   temperature: 0,
-});
+  maxRetries: 2,
+  // other params...
+})
 export default async function getCourseService() {
   const service = new CourseService();
   await service.init();
